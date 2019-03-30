@@ -1,0 +1,28 @@
+.header {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.header button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.header button:hover {
+    background-color: #ddd;
+}
+
+.header button.active {
+    background-color: #ccc;
+}
+
+.content {
+    padding: 25px 15px;
+    border-top: none;
+}
