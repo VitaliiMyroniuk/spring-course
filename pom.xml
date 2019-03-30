@@ -19,6 +19,7 @@
         <servlet.ver>3.1.0</servlet.ver>
         <jstl.ver>1.2</jstl.ver>
         <freemarker.ver>2.3.28</freemarker.ver>
+        <lowagie.ver>2.1.7</lowagie.ver>
     </properties>
 
     <dependencies>
@@ -116,6 +117,13 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>${freemarker.ver}</version>
+        </dependency>
+
+        <!-- Pdf view support -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>${lowagie.ver}</version>
         </dependency>
 
     </dependencies>

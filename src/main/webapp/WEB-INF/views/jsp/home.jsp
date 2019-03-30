@@ -5,6 +5,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
 <spring:url var="bookingUrl" value="/booking" htmlEscape="true"/>
+<spring:url var="bookingTicketsUrl" value="/booking/tickets" htmlEscape="true"/>
 
 <tags:page>
     <jsp:body>
@@ -18,6 +19,7 @@
                 <th width="150" align="left">Date</th>
                 <th width="100" align="left">Auditorium</th>
                 <th width="100" align="left">Book ticket</th>
+                <th width="120" align="left">Booked tickets</th>
             </tr>
             <c:forEach var="event" items="${events}">
                 <tr>
@@ -28,6 +30,9 @@
                     <td>${event.auditorium.name}</td>
                     <td>
                         <a href="${bookingUrl}?eventName=${event.name}&eventDateTime=${event.dateTime}&auditoriumName=${event.auditorium.name}">Book ticket</a>
+                    </td>
+                    <td>
+                        <a href="${bookingTicketsUrl}?eventName=${event.name}&dateTime=${event.dateTime}&auditoriumName=${event.auditorium.name}">View</a>
                     </td>
                 </tr>
             </c:forEach>

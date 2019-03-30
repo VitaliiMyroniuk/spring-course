@@ -32,11 +32,13 @@ public class BookingController {
 	private static final String HOME_PAGE = "home";
 	private static final String BOOKING_PAGE = "booking";
 	private static final String REDIRECT_TO_HOME_PAGE = "redirect:/home";
+	private static final String TICKETS_PDF_VIEW = "tickets";
 
 	private static final String EVENTS_ATTRIBUTE = "events";
 	private static final String BOOKING_FORM_ATTRIBUTE = "bookingForm";
 	private static final String SEATS_NUMBER_ATTRIBUTE = "seatsNumber";
 	private static final String VIP_SEATS_ATTRIBUTE = "vipSeats";
+	private static final String TICKETS_ATTRIBUTE = "tickets";
 
 	@Resource
 	private BookingService bookingService;
@@ -83,6 +85,14 @@ public class BookingController {
 		bookingService.bookTicket(user, ticket);
 
 		return REDIRECT_TO_HOME_PAGE;
+	}
+
+	@RequestMapping(value = "/booking/tickets", method = GET, headers = "Accept=application/pdf")
+	public ModelAndView getTicketsForEvent(@RequestParam String eventName,
+										   @RequestParam @DateTimeFormat(pattern = DATE_TIME_PATTERN) LocalDateTime dateTime,
+										   @RequestParam String auditoriumName) {
+		List<Ticket> tickets = bookingService.getTicketsForEvent(eventName, auditoriumName, dateTime);
+		return new ModelAndView(TICKETS_PDF_VIEW, TICKETS_ATTRIBUTE, tickets);
 	}
 
 }

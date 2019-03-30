@@ -30,7 +30,7 @@
 
     <!-- View resolver -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="order" value="1"/>
+        <property name="order" value="2"/>
         <property name="prefix" value="/WEB-INF/views/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
@@ -40,6 +40,11 @@
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
+    </bean>
+
+    <bean id="resourceBundleViewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <property name="order" value="1"/>
+        <property name="basename" value="views"/>
     </bean>
 
 </beans>
