@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="3.1"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		                     http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+    <!-- Configurations for the root context (parent context) which be shared with child contexts created by each DispatcherServlet -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/config/root-context.xml</param-value>
+    </context-param>
+
+    <!-- ContextLoaderListener creates common context for all servlets and filters -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--
+    Definition of Dispatcher servlet.
+    If you do not specify contextConfigLocation parameter then by default web-context is loaded from WEB-INF/<servlet-name>-servlet.xml file.
+    -->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/web-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>

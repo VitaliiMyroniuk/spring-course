@@ -8,6 +8,7 @@
     <groupId>com.epam</groupId>
     <artifactId>spring-course</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <spring.ver>4.2.4.RELEASE</spring.ver>
@@ -15,6 +16,8 @@
         <hibernate.ver>5.1.0.Final</hibernate.ver>
         <h2.ver>1.4.191</h2.ver>
         <junit.ver>4.9</junit.ver>
+        <servlet.ver>3.1.0</servlet.ver>
+        <jstl.ver>1.2</jstl.ver>
     </properties>
 
     <dependencies>
@@ -55,6 +58,11 @@
             <artifactId>spring-aop</artifactId>
             <version>${spring.ver}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.ver}</version>
+        </dependency>
 
         <!--AspectJ support-->
         <dependency>
@@ -87,6 +95,21 @@
             <version>${junit.ver}</version>
         </dependency>
 
+        <!-- Servlets support -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.ver}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSTL support -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.ver}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -98,6 +121,19 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.15.v20190215</version>
+                <configuration>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                    <httpConnector>
+                        <port>8090</port>
+                    </httpConnector>
                 </configuration>
             </plugin>
         </plugins>
