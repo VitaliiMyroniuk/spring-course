@@ -12,7 +12,7 @@
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- This configuration allows to autodetect and bind beans using annotations -->
-    <context:component-scan base-package="web.controller"/>
+    <context:component-scan base-package="web.controller, web.handler"/>
 
     <!-- This configuration registers default handler mapping, handler adapter and other beans -->
     <mvc:annotation-driven/>
