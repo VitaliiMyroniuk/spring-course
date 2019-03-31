@@ -51,5 +51,21 @@
                 </tr>
             </table>
         </form:form>
+
+        Register more users by uploading JSON file:
+        <form:form action="/upload-users" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>
+                        <input type="file" name="file"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Upload"/>
+                    </td>
+                </tr>
+            </table>
+        </form:form>
     </jsp:body>
 </tags:page>

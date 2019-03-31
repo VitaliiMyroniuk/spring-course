@@ -20,6 +20,9 @@
         <jstl.ver>1.2</jstl.ver>
         <freemarker.ver>2.3.28</freemarker.ver>
         <lowagie.ver>2.1.7</lowagie.ver>
+        <commons.fileupload.ver>1.3.3</commons.fileupload.ver>
+        <gson.ver>2.8.5</gson.ver>
+        <apache.commons.ver>3.8.1</apache.commons.ver>
     </properties>
 
     <dependencies>
@@ -124,6 +127,27 @@
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
             <version>${lowagie.ver}</version>
+        </dependency>
+
+        <!-- File uploading support -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons.fileupload.ver}</version>
+        </dependency>
+
+        <!-- JSON converter -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.ver}</version>
+        </dependency>
+
+        <!-- Utility library -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.commons.ver}</version>
         </dependency>
 
     </dependencies>

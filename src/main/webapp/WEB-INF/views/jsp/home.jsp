@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
 <spring:url var="bookingUrl" value="/booking" htmlEscape="true"/>
@@ -37,5 +38,21 @@
                 </tr>
             </c:forEach>
         </table>
+
+        <br>Add more events by uploading JSON file:
+        <form:form action="/upload-events" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>
+                        <input type="file" name="file"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Upload"/>
+                    </td>
+                </tr>
+            </table>
+        </form:form>
     </jsp:body>
 </tags:page>

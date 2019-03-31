@@ -6,7 +6,6 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
 <spring:url var="bookingUrl" value="/booking" htmlEscape="true"/>
-<spring:url var="registerUrl" value="/register" htmlEscape="true"/>
 
 <tags:page>
     <jsp:body>
@@ -73,7 +72,5 @@
                 </tr>
             </table>
         </form:form>
-
-        <a href="${registerUrl}">Sign up</a>
     </jsp:body>
 </tags:page>
