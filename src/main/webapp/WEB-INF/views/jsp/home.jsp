@@ -40,7 +40,7 @@
         </table>
 
         <br>Add more events by uploading JSON file:
-        <form:form action="/upload-events" method="post" enctype="multipart/form-data">
+        <form:form action="/upload-events?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>

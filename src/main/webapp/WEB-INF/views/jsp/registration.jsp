@@ -9,7 +9,7 @@
 
 <tags:page>
     <jsp:body>
-        <form:form action="${registerUrl}" method="post" modelAttribute="userForm">
+        <form:form action="${registerUrl}?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="userForm">
             <table>
                 <tr>
                     <td colspan="2">
@@ -53,7 +53,7 @@
         </form:form>
 
         Register more users by uploading JSON file:
-        <form:form action="/upload-users" method="post" enctype="multipart/form-data">
+        <form:form action="/upload-users?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>

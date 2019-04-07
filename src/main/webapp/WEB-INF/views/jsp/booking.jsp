@@ -9,7 +9,7 @@
 
 <tags:page>
     <jsp:body>
-        <form:form action="${bookingUrl}" method="post" modelAttribute="bookingForm">
+        <form:form action="${bookingUrl}?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="bookingForm">
             <table>
                 <tr>
                     <td colspan="2">
