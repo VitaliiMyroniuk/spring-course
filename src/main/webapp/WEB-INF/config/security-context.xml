@@ -22,6 +22,9 @@
                     authentication-failure-url="/login?error"/>
         <logout delete-cookies="JSESSIONID"
                 logout-success-url="/login?logout"/>
+        <remember-me token-validity-seconds="604800"
+                     user-service-ref="userDetailsService"
+                     data-source-ref="dataSource"/>
     </http>
 
     <authentication-manager>

@@ -29,6 +29,13 @@
                     <td><input id="password" type="password" name="password"/></td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td>
+                        <label for="remember-me">Remember me</label>
+                        <input id="remember-me" type="checkbox" name="remember-me"/>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="submit" value="Login"/>
