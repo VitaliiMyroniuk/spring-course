@@ -12,6 +12,7 @@ public class UserForm {
 	private String name;
 	@DateTimeFormat(pattern = DATE_PATTERN)
 	private LocalDate birthday;
+	private String password;
 
 	public String getEmail() {
 		return email;
@@ -35,6 +36,14 @@ public class UserForm {
 
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

@@ -45,6 +45,17 @@
                 </tr>
 
                 <tr>
+                    <td colspan="2">
+                        <form:label path="password">Password</form:label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <form:password path="password"/>
+                    </td>
+                </tr>
+
+                <tr>
                     <td>
                         <input type="submit" value="Submit"/>
                     </td>

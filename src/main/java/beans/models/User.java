@@ -4,10 +4,14 @@ import java.time.LocalDate;
 
 public class User {
 
+    private static final String DEFAULT_ROLE = "REGISTERED_USER";
+
     private long id;
     private String email;
     private String name;
     private LocalDate birthday;
+    private String password;
+    private String roles;
 
     public User() {
     }
@@ -17,6 +21,14 @@ public class User {
         this.email = email;
         this.name = name;
         this.birthday = birthday;
+    }
+
+    public User(String email, String name, LocalDate birthday, String password) {
+        this.email = email;
+        this.name = name;
+        this.birthday = birthday;
+        this.password = password;
+        this.roles = DEFAULT_ROLE;
     }
 
     public User(String email, String name, LocalDate birthday) {
@@ -59,6 +71,22 @@ public class User {
         this.birthday = birthday;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -94,6 +122,8 @@ public class User {
                ", email='" + email + '\'' +
                ", name='" + name + '\'' +
                ", birthday=" + birthday +
+               ", password='" + password + '\'' +
+               ", roles='" + roles + '\'' +
                '}';
     }
 

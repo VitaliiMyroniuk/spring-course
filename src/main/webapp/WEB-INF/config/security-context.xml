@@ -12,7 +12,9 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/resources/**" access="permitAll"/>
         <intercept-url pattern="/register" access="permitAll"/>
-        <intercept-url pattern="/**" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/home" access="isAuthenticated()"/>
+        <intercept-url pattern="/booking/*" access="hasAnyRole('ADMIN', 'BOOKING_MANAGER')" />
+        <intercept-url pattern="/**" access="hasAnyRole('ADMIN', 'REGISTERED_USER')"/>
     </http>
 
     <authentication-manager>
@@ -21,6 +23,7 @@
                 <user name="admin" password="1234" authorities="ROLE_ADMIN"/>
             </user-service>
         </authentication-provider>
+        <authentication-provider user-service-ref="userDetailsService"/>
     </authentication-manager>
 
 </beans:beans>

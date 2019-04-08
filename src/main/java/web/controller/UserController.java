@@ -40,7 +40,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = POST)
 	public RedirectView registerUser(UserForm userForm) {
-		User user = new User(userForm.getEmail(), userForm.getName(), userForm.getBirthday());
+		User user = new User(userForm.getEmail(), userForm.getName(), userForm.getBirthday(), userForm.getPassword());
 		userService.register(user);
 		return new RedirectView(HOME_PAGE);
 	}
