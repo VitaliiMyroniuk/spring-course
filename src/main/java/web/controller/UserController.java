@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
 import static java.util.Optional.ofNullable;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -24,12 +25,28 @@ public class UserController {
 	private static final String HOME_PAGE = "home";
 	private static final String REGISTRATION_PAGE = "registration";
 	private static final String USERS_PAGE = "users";
+	private static final String LOGIN_PAGE = "login";
 
 	private static final String USER_FORM_ATTRIBUTE = "userForm";
 	private static final String USERS_ATTRIBUTE = "users";
+	private static final String LOGIN_ERROR_MSG_ATTRIBUTE = "loginErrorMsg";
+	private static final String LOGOUT_MSG_ATTRIBUTE = "logoutMsg";
+
+	private static final String LOGIN_ERROR_MSG = "Invalid email and password";
+	private static final String LOGOUT_MSG = "You have been logged out successfully";
 
 	@Resource
 	private UserService userService;
+
+	@RequestMapping(value = "/login", method = GET)
+	public String login(@RequestParam(required = false) String error,
+						@RequestParam(required = false) String logout, Model model) {
+		if (nonNull(error))
+			model.addAttribute(LOGIN_ERROR_MSG_ATTRIBUTE, LOGIN_ERROR_MSG);
+		if (nonNull(logout))
+			model.addAttribute(LOGOUT_MSG_ATTRIBUTE, LOGOUT_MSG);
+		return LOGIN_PAGE;
+	}
 
 	@RequestMapping(value = "/register", method = GET)
 	public String registrationPage(Model model) {

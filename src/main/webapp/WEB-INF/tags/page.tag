@@ -8,8 +8,8 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="${contextPath}/resources/js/main.js" ></script>
+        <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+        <%--<script type="text/javascript" src="${contextPath}/resources/js/main.js"></script>--%>
     </head>
     <body>
         <tags:header/>

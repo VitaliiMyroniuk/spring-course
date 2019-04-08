@@ -26,3 +26,17 @@
     padding: 25px 15px;
     border-top: none;
 }
+
+.content h2 {
+    margin: 0 0 40px 0;
+}
+
+.login-error-message {
+    color: red;
+    margin: 15px 2px;
+}
+
+.logout-message {
+    color: blue;
+    margin: 15px 2px;
+}
