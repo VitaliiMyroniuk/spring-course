@@ -5,9 +5,11 @@ import beans.models.Ticket;
 import beans.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -15,6 +17,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(@Qualifier("userDAO") UserDAO userDAO) {
@@ -22,6 +26,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public User register(User user) {
+        String password = user.getPassword();
+        String encodedPassword = passwordEncoder.encode(password);
+        user.setPassword(encodedPassword);
         return userDAO.create(user);
     }
 
