@@ -21,6 +21,7 @@
         <property name="birthday" type="java.time.LocalDate" column="BIRTHDAY"/>
         <property name="password" column="PASSWORD" type="java.lang.String"/>
         <property name="roles" column="ROLES" type="java.lang.String"/>
+        <one-to-one name="userAccount" class="beans.models.UserAccount" cascade="save-update"/>
     </class>
 
 </hibernate-mapping>

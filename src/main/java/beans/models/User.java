@@ -12,6 +12,7 @@ public class User {
     private LocalDate birthday;
     private String password;
     private String roles;
+    private UserAccount userAccount;
 
     public User() {
     }
@@ -87,6 +88,14 @@ public class User {
         this.roles = roles;
     }
 
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -124,6 +133,7 @@ public class User {
                ", birthday=" + birthday +
                ", password='" + password + '\'' +
                ", roles='" + roles + '\'' +
+               ", userAccount=" + userAccount +
                '}';
     }
 
