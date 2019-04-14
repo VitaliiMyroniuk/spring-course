@@ -13,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class BookingServiceImpl implements BookingService {
 
+    @Resource
+    private UserAccountService userAccountService;
     private final EventService eventService;
     private final AuditoriumService auditoriumService;
     private final UserService userService;
@@ -136,10 +139,10 @@ public class BookingServiceImpl implements BookingService {
         boolean seatsAreAlreadyBooked = bookedTickets.stream()
                 .anyMatch(bookedTicket -> ticket.getSeatsList().stream()
                 .anyMatch(bookedTicket.getSeatsList()::contains));
-        if (!seatsAreAlreadyBooked)
-            bookingDAO.create(user, ticket);
-        else
+        if (seatsAreAlreadyBooked)
             throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
+        userAccountService.withdrawMoney(user.getUserAccount(), ticket.getPrice());
+        bookingDAO.create(user, ticket);
 
         return ticket;
     }

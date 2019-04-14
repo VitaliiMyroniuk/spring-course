@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 import static java.util.Objects.isNull;
+import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.math.NumberUtils.DOUBLE_ZERO;
 
 @Service("userAccountService")
 @Transactional
@@ -41,6 +43,24 @@ public class UserAccountServiceImpl implements UserAccountService {
 			userAccount.setBalance(currentBalance + amount);
 			userAccountDao.update(userAccount);
 		}
+	}
+
+	@Override
+	public void withdrawMoney(UserAccount userAccount, double amount) {
+		double currentBalance = userAccount.getBalance();
+		if (amount > currentBalance)
+			throw new IllegalStateException("Not enough money to book a ticket");
+		userAccount.setBalance(currentBalance - amount);
+		userAccountDao.update(userAccount);
+	}
+
+	@Override
+	public double getBalance(String userEmail) {
+		User user = userService.getUserByEmail(userEmail);
+		UserAccount userAccount = user.getUserAccount();
+		return ofNullable(userAccount)
+				.map(UserAccount::getBalance)
+				.orElse(DOUBLE_ZERO);
 	}
 
 }

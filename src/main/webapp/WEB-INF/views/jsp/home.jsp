@@ -2,57 +2,30 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
-<spring:url var="bookingUrl" value="/booking" htmlEscape="true"/>
-<spring:url var="bookingTicketsUrl" value="/booking/tickets" htmlEscape="true"/>
+<spring:url var="refillAccountUrl" value="/refill-account" htmlEscape="true"/>
 
 <tags:page>
     <jsp:body>
-        List of events:
-
-        <table border="1">
-            <tr>
-                <th width="100" align="left">Name</th>
-                <th width="100" align="left">Rate</th>
-                <th width="100" align="left">Price</th>
-                <th width="150" align="left">Date</th>
-                <th width="100" align="left">Auditorium</th>
-                <th width="100" align="left">Book ticket</th>
-                <th width="120" align="left">Booked tickets</th>
-            </tr>
-            <c:forEach var="event" items="${events}">
-                <tr>
-                    <td>${event.name}</td>
-                    <td>${event.rate}</td>
-                    <td>${event.basePrice}</td>
-                    <td>${event.dateTime}</td>
-                    <td>${event.auditorium.name}</td>
-                    <td>
-                        <a href="${bookingUrl}?eventName=${event.name}&eventDateTime=${event.dateTime}&auditoriumName=${event.auditorium.name}">Book ticket</a>
-                    </td>
-                    <td>
-                        <a href="${bookingTicketsUrl}?eventName=${event.name}&dateTime=${event.dateTime}&auditoriumName=${event.auditorium.name}">View</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-
-        <br>Add more events by uploading JSON file:
-        <form:form action="/upload-events?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+        <b>Email:</b> ${userEmail}
+        <br>
+        <b>Current balance:</b> ${balance}
+        <br><br>
+        <form action="${refillAccountUrl}" method="post">
             <table>
                 <tr>
-                    <td>
-                        <input type="file" name="file"/>
-                    </td>
+                    <td><label for="amount">Amount</label></td>
+                    <td><input id="amount" type="number" step="0.01" name="amount"/></td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" value="Upload"/>
+                        <input type="hidden" name="userEmail" value="${userEmail}"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input type="submit" value="Refill"/>
                     </td>
                 </tr>
             </table>
-        </form:form>
+        </form>
     </jsp:body>
 </tags:page>

@@ -10,4 +10,8 @@ public interface UserAccountService {
 
 	void refillAccount(String userEmail, double amount);
 
+	void withdrawMoney(UserAccount userAccount, double amount);
+
+	double getBalance(String userEmail);
+
 }

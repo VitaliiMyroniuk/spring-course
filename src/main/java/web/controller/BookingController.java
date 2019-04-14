@@ -29,7 +29,7 @@ public class BookingController {
 
 	private static final String DATE_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm";
 
-	private static final String HOME_PAGE = "home";
+	private static final String EVENTS_PAGE = "events";
 	private static final String BOOKING_PAGE = "booking";
 	private static final String REDIRECT_TO_HOME_PAGE = "redirect:/home";
 	private static final String TICKETS_PDF_VIEW = "tickets";
@@ -49,9 +49,9 @@ public class BookingController {
 	@Resource
 	private UserService userService;
 
-	@RequestMapping(value = "/home", method = GET)
-	public ModelAndView homePage() {
-		ModelAndView modelAndView = new ModelAndView(HOME_PAGE);
+	@RequestMapping(value = "/events", method = GET)
+	public ModelAndView eventsPage() {
+		ModelAndView modelAndView = new ModelAndView(EVENTS_PAGE);
 		modelAndView.addObject(EVENTS_ATTRIBUTE, eventService.getAll());
 		return modelAndView;
 	}

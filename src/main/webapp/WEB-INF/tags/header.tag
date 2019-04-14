@@ -7,6 +7,7 @@
 <div class="header">
     <div class="tabs">
         <button class="tabs__home" onclick="window.location='home';">Home</button>
+        <button class="tabs__events" onclick="window.location='events';">Events</button>
         <button class="tabs__users" onclick="window.location='users';">Users</button>
         <button class="tabs__sign-up" onclick="window.location='register';">Sign up</button>
         <button class="tabs__logout" type="submit" form="logout-form">Logout</button>

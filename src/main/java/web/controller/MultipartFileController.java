@@ -26,6 +26,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class MultipartFileController {
 
 	private static final String REDIRECT_TO_HOME_PAGE = "redirect:/home";
+	private static final String REDIRECT_TO_EVENTS_PAGE = "redirect:/events";
 
 	@Resource
 	private UserService userService;
@@ -60,7 +61,7 @@ public class MultipartFileController {
 				eventService.create(event);
 			});
 		}
-		return REDIRECT_TO_HOME_PAGE;
+		return REDIRECT_TO_EVENTS_PAGE;
 	}
 
 }
