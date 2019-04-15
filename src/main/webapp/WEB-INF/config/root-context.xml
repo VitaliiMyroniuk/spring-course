@@ -7,5 +7,6 @@
 
 	<import resource="classpath:spring.xml"/>
 	<import resource="security-context.xml"/>
+	<import resource="transaction-context.xml"/>
 
 </beans>

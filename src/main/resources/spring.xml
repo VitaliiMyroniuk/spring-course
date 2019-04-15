@@ -11,7 +11,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="beans"/>
+    <context:component-scan base-package="beans">
+        <context:exclude-filter type="annotation" expression="org.springframework.transaction.annotation.EnableTransactionManagement"/>
+    </context:component-scan>
     <aop:aspectj-autoproxy/>
 
 </beans>
