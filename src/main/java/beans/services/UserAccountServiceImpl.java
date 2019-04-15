@@ -4,7 +4,11 @@ import beans.daos.UserAccountDao;
 import beans.models.User;
 import beans.models.UserAccount;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
 
@@ -19,6 +23,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 	private UserAccountDao userAccountDao;
 	@Resource
 	private UserService userService;
+	@Resource
+	private PlatformTransactionManager txManager;
 
 	@Override
 	@Transactional
@@ -33,18 +39,27 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
-	@Transactional
 	public void refillAccount(String userEmail, double amount) {
-		User user = userService.getUserByEmail(userEmail);
-		UserAccount userAccount = user.getUserAccount();
-		if (isNull(userAccount)) {
-			userAccount = new UserAccount(user, amount);
-			userAccountDao.create(userAccount);
-		} else {
-			double currentBalance = userAccount.getBalance();
-			userAccount.setBalance(currentBalance + amount);
-			userAccountDao.update(userAccount);
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setIsolationLevel(TransactionDefinition.ISOLATION_REPEATABLE_READ);
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = txManager.getTransaction(def);
+		try {
+			User user = userService.getUserByEmail(userEmail);
+			UserAccount userAccount = user.getUserAccount();
+			if (isNull(userAccount)) {
+				userAccount = new UserAccount(user, amount);
+				userAccountDao.create(userAccount);
+			} else {
+				double currentBalance = userAccount.getBalance();
+				userAccount.setBalance(currentBalance + amount);
+				userAccountDao.update(userAccount);
+			}
+		} catch (Exception ex) {
+			txManager.rollback(status);
+			throw new RuntimeException(ex);
 		}
+		txManager.commit(status);
 	}
 
 	@Override
