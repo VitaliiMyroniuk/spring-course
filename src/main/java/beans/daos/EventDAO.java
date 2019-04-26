@@ -9,6 +9,8 @@ import java.util.Objects;
 
 public interface EventDAO {
 
+    Event get(long id);
+
     Event create(Event event);
 
     Event update(Event event);

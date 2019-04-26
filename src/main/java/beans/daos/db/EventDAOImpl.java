@@ -16,6 +16,11 @@ import java.util.List;
 public class EventDAOImpl extends AbstractDAO implements EventDAO {
 
     @Override
+    public Event get(long id) {
+        return getCurrentSession().get(Event.class, id);
+    }
+
+    @Override
     public Event create(Event event) {
         System.out.println("Creating " + event);
         EventDAO.validateEvent(event);

@@ -22,6 +22,11 @@ public class EventServiceImpl implements EventService {
         this.eventDAO = eventDAO;
     }
 
+    @Override
+    public Event getById(long id) {
+        return eventDAO.get(id);
+    }
+
     public Event create(Event event) {
         return eventDAO.create(event);
     }

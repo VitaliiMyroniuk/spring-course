@@ -23,6 +23,11 @@ public class InMemoryEventDAO implements EventDAO {
     private static final Map<String, List<Event>> db = new HashMap<>();
 
     @Override
+    public Event get(long id) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public Event create(Event event) {
         return safeUpdate(event);
     }

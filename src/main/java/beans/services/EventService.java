@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface EventService {
 
+    Event getById(long id);
+
     Event create(Event event);
 
     void remove(Event event);
