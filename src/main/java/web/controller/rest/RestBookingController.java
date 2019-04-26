@@ -44,7 +44,7 @@ public class RestBookingController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "event/{id}/tickets", method = GET)
+	@RequestMapping(value = "event/{id}/tickets", method = GET, produces = "application/pdf")
 	public List<TicketDTO> getTicketsForEvent(@PathVariable long id) {
 		Event event = eventService.getById(id);
 		String eventName = event.getName();

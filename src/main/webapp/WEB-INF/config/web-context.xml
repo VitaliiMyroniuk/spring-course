@@ -15,7 +15,13 @@
     <context:component-scan base-package="web.controller, web.handler"/>
 
     <!-- This configuration registers default handler mapping, handler adapter and other beans -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters register-defaults="false">
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter"/>
+            <bean class="beans.converters.impl.TicketsToPdfMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- This configuration allows to handle http GET request to static content -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
@@ -29,6 +35,31 @@
     </bean>
 
     <!-- View resolver -->
+    <mvc:view-resolvers>
+        <mvc:content-negotiation>
+            <mvc:default-views>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+            </mvc:default-views>
+        </mvc:content-negotiation>
+        <mvc:freemarker cache-views="true"
+                        prefix=""
+                        suffix=".ftl"
+                        view-class="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <mvc:jsp prefix="/WEB-INF/views/jsp/"
+                 suffix=".jsp"
+                 view-class="org.springframework.web.servlet.view.InternalResourceView"/>
+    </mvc:view-resolvers>
+
+<!--
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+            </list>
+        </property>
+    </bean>
+
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="order" value="2"/>
         <property name="prefix" value="/WEB-INF/views/jsp/"/>
@@ -46,11 +77,30 @@
         <property name="order" value="1"/>
         <property name="basename" value="views"/>
     </bean>
+-->
 
     <!-- File uploading support -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="100000"/>
         <property name="maxInMemorySize" value="50000"/>
+    </bean>
+
+    <!-- Settings for content negotiation strategies -->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="true"/>
+        <property name="favorParameter" value="true"/>
+        <property name="ignoreAcceptHeader" value="false"/>
+        <property name="ignoreUnknownPathExtensions" value="true"/>
+        <property name="defaultContentType" value="application/json"/>
+        <property name="useJaf" value="false"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/xml"/>
+                <entry key="html" value="text/html"/>
+                <entry key="pdf" value="application/pdf"/>
+            </map>
+        </property>
     </bean>
 
 </beans>
